@@ -3,13 +3,14 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import logo from './assetsPages/logoInvestment.png'
 import ponte from './assetsPages/ponteInvestment.png'
 
-export default function Splash() {
+export default function Start() {
   return (
     <View style={styles.container}>
       <Image source={logo} style={{marginTop:30}}/>
       <Image source={ponte}/>
 
       <View style={{gap:15, alignItems:'center'}}>
+
         <Pressable >
 
           <Text style={styles.butao}>Começe Investir</Text>
@@ -21,6 +22,7 @@ export default function Splash() {
           <Text style={styles.senha}>Não tenho uma conta</Text>
 
         </Pressable>
+
       </View>
 
       <StatusBar style="auto" />

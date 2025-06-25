@@ -3,25 +3,33 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 import { Card } from 'react-native-paper';
 
 import logo from './assetsPages/logoInvestment.png'
+import back from './assetsPages/backArrow.png'
 
 export default function Login() {
   return (
     <SafeAreaView style={styles.container}>
+
+      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: -80, marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+        <Image source={back}/>
+      </View>
 
       <Image style={styles.png} source={logo} />
 
 
       <View style={styles.div}>
 
-        <Card style={{backgroundColor: '#F3E373'}}>
-          <Text style={styles.paragraph}>Login</Text>
-          <TextInput style={styles.input}/>
-        </Card>
+        
 
-        <Card style={{backgroundColor: '#F3E373'}}>
+        <View style={{backgroundColor: '#F3E373',}}>
+          <Text style={styles.paragraph}>Usuário</Text>
+          <TextInput style={styles.input}/>
+        </View>
+
+        <View style={{backgroundColor: '#F3E373'}}>
           <Text style={styles.paragraph}>Senha</Text>
           <TextInput secureTextEntry={true} style={styles.input}/>
-        </Card>
+        </View>
+
       </View>
 
 
@@ -60,9 +68,9 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 2,
-    width:200,
-    height: 25,
-    borderRadius:8,
+    width: 250,
+    height: 30,
+    borderRadius: 12,
     backgroundColor: '#2E2E2E',
     color: 'white',
     padding: 10
@@ -70,7 +78,9 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 13,
-    fontWeight: 300,
+    fontWeight: 500,
+  
+    
     
   },
   div:{
@@ -83,9 +93,11 @@ const styles = StyleSheet.create({
   butao:{
     color: "white",
     backgroundColor: '#000000',
-    padding: 10,
-    paddingHorizontal:80,
+    padding: 15,
+    paddingHorizontal:100,
+    marginBottom: 5,
     borderRadius: 12,
+    fontSize: 16,
     fontWeight: 600,
 
   },
