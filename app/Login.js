@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   senha:{
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 14,
     
   }
 });
