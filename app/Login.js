@@ -1,24 +1,31 @@
 import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } from 'react-native';
 
 import { Card } from 'react-native-paper';
+import { useRouter } from 'expo-router'
 
 import logo from '../assets/logoInvestment.png'
 import back from '../assets/backArrow.png'
 
 export default function Login() {
+
+  const router = useRouter()
+
   return (
+
     <SafeAreaView style={styles.container}>
 
-      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: -80, marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
-        <Image source={back}/>
-      </View>
+      <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+
+        <View>
+          <Image source={back}/>
+        </View>
+
+      </Pressable>
 
       <Image style={styles.png} source={logo} />
 
 
       <View style={styles.div}>
-
-        
 
         <View style={{backgroundColor: '#F3E373',}}>
           <Text style={styles.paragraph}>Usuário</Text>
@@ -80,8 +87,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 500,
   
-    
-    
   },
   div:{
     flex: 0.6,

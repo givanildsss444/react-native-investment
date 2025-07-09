@@ -1,9 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { useRouter } from 'expo-router'
+
+
 import logo from '../assets/logoInvestment.png'
 import ponte from '../assets/ponteInvestment.png'
 
 export default function Start() {
+
+  const router = useRouter()
+
   return (
     <View style={styles.container}>
       <Image source={logo} style={{marginTop:30}}/>
@@ -11,13 +17,13 @@ export default function Start() {
 
       <View style={{gap:15, alignItems:'center'}}>
 
-        <Pressable >
+        <Pressable onPress={() => router.navigate('/Login')}>
 
           <Text style={styles.butao}>Começe Investir</Text>
       
         </Pressable> 
 
-        <Pressable>
+        <Pressable onPress={() => router.navigate('/NaoConta')}>
 
           <Text style={styles.senha}>Não tenho uma conta</Text>
 
@@ -33,6 +39,8 @@ export default function Start() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100vh',
+    width: '100%',
     backgroundColor: '#F3E373',
     alignItems: 'center',
     justifyContent: 'space-around',
