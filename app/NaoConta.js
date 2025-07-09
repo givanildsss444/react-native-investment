@@ -25,7 +25,7 @@ export default function Login() {
             <TextInput style={styles.input}/>
         </View>
       
-        <View style={{backgroundColor: '#F3E373'}}>
+        <View style={{backgroundColor: '#F3E373',}}>
             <Text style={styles.paragraph}>E-mail</Text>
             <TextInput secureTextEntry={true} style={styles.input}/>
         </View>
@@ -106,5 +106,5 @@ const styles = StyleSheet.create({
     fontWeight: 600,
 
   },
-
+  
 });

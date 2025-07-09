@@ -27,7 +27,7 @@ export default function Login() {
 
       <View style={styles.div}>
 
-        <View style={{backgroundColor: '#F3E373',}}>
+        <View style={{backgroundColor: '#F3E373'}}>
           <Text style={styles.paragraph}>Usuário</Text>
           <TextInput style={styles.input}/>
         </View>
