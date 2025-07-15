@@ -41,7 +41,7 @@ export default function Login() {
 
 
       <View style={{gap:15, alignItems:'center'}}>
-        <Pressable >
+        <Pressable onPress={() => router.navigate('/Inicio')}>
 
           <Text style={styles.butao}>Entrar</Text>
       
