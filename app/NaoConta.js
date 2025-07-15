@@ -52,7 +52,7 @@ export default function Login() {
       
     </View>
 
-    <Pressable >
+    <Pressable onPress={() => router.navigate('/Login')}>
     
         <Text style={styles.butao}>Confirmar</Text>
           

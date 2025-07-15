@@ -47,7 +47,7 @@ export default function Login() {
       
         </Pressable> 
 
-        <Pressable>
+        <Pressable onPress={() => router.navigate('/EsqueciSenha')}>
 
           <Text style={styles.senha}>Esqueci minha Senha</Text>
 
