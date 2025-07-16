@@ -13,7 +13,7 @@ const router = useRouter()
 
     <View style={styles.container}>
 
-        <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+        <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '0%', marginBottom: '-10%',backgroundColor: '#F3E373', border: 'none'}}>
         
                 <View>
                   <Image source={back}/>
@@ -32,12 +32,10 @@ const router = useRouter()
             <View style={styles.son}/>
             <View style={styles.son}/>
 
-
-
         </View>
     
 
-        <Text>Reenviar código</Text>
+        <Text style={{marginTop: '-15%'}}>Reenviar código</Text>
 
         <Pressable onPress={() => router.navigate('/NovaSenha')}>
         

@@ -3,7 +3,6 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 import { Card } from 'react-native-paper';
 import { useRouter } from 'expo-router'
 
-
 export default function Login() {
 
   const router = useRouter()

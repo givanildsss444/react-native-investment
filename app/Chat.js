@@ -10,7 +10,7 @@ export default function Inicio(){
 
         <SafeAreaView style={styles.container}>
          
-           <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+           <Pressable onPress={() => router.back()} style={{justifyContent: 'space-between', marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
                    <Image source={back}/>
          
            </Pressable>

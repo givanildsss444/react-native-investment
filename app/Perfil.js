@@ -1,5 +1,6 @@
-import { Text,  StyleSheet, SafeAreaView, View, Pressable } from "react-native";
+import { Text,  StyleSheet, SafeAreaView, View, Pressable, Image } from "react-native";
 import { useRouter } from "expo-router";
+import back from '../assets/backArrow.png'
 
 export default function Inicio(){
 
@@ -8,7 +9,10 @@ export default function Inicio(){
     return (
 
         <SafeAreaView style={styles.container}>
-         
+            <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '12%', marginBottom: '-10%',backgroundColor: '#F3E373', border: 'none'}}>
+                <Image source={back}/>
+                     
+            </Pressable>
                 
                 <Text>Perfil </Text>
                 

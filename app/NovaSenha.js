@@ -12,25 +12,21 @@ export default function NovaSenha() {
 
     <View style={styles.container}>
 
-        <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+        <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '12%', marginBottom: '-10%',backgroundColor: '#F3E373', border: 'none'}}>
             <Image source={back}/>
         
         </Pressable>
 
-        <Image source={logo}/>
+        <Image source={logo} style={{marginTop: '20%', marginBottom: '30%'}}/>
 
-        <View style={{backgroundColor: '#F3E373',}}>
+        <View style={styles.caixinhas}>
             <Text style={styles.paragraph}>Nova senha</Text>
             <TextInput style={styles.input}/>
-        </View>
-
-        <View style={{backgroundColor: '#F3E373',}}>
             <Text style={styles.paragraph}>Confirmar nova senha</Text>
             <TextInput style={styles.input}/>
         </View>
 
         <Pressable onPress={() => router.navigate('/Login')}>
-        
             <Text style={styles.butao}>Confirmar</Text>
               
         </Pressable> 
@@ -44,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3E373',
     alignItems: 'center',
-    justifyContent: 'space-around',
+
   },
 
   input: {
@@ -54,7 +50,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#2E2E2E',
     color: 'white',
-    padding: 10
+    padding: 10,
+    marginBottom: '10%'
 
   },
   paragraph: {
@@ -71,7 +68,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     fontWeight: 600,
     fontSize: 18,
-
+    marginBottom: '45%'
   },
+
+  caixinhas:{
+    backgroundColor: '#F3E373',
+    flex: 1,
+    flexDirection: 'column',
+  }
 
 });
