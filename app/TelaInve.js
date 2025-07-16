@@ -3,9 +3,6 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 import { Card } from 'react-native-paper';
 import { useRouter } from 'expo-router'
 
-import logo from '../assets/logoInvestment.png'
-import back from '../assets/backArrow.png'
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 export default function Login() {
 
