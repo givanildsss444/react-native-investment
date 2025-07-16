@@ -15,10 +15,7 @@ export default function Login() {
     <SafeAreaView style={styles.container}>
 
       <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
-
-        <View>
           <Image source={back}/>
-        </View>
 
       </Pressable>
 

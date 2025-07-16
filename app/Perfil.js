@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable, SafeAreaView } from "react-native";
+import { Text,  StyleSheet, SafeAreaView, View, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function Inicio(){
@@ -8,25 +8,26 @@ export default function Inicio(){
     return (
 
         <SafeAreaView style={styles.container}>
+         
+                
+                <Text>Perfil </Text>
+                
             <View style={styles.navBar}>
-                
-                <Text>Casa </Text>
-                
+                            
+                <Pressable onPress={() => router.navigate('/Inicio')}>
+                    <Text>Casa </Text>
+                </Pressable>
+                            
                 <Pressable onPress={() => router.navigate('/TelaInve')}>
-                <Text>Investimentos </Text>
+                    <Text>Investimentos </Text>
                 </Pressable>
-
+            
                 <Pressable onPress={() => router.navigate('/Chat')}>
-                <Text>Chat </Text>
+                    <Text>Chat </Text>
                 </Pressable>
-
+            
             </View>
-
-            <Pressable onPress={() => router.navigate('/Perfil')}>
-            <View style={styles.navIni}>
-
-            </View>
-            </Pressable>
+              
         </SafeAreaView>
 
     );
@@ -39,6 +40,8 @@ const styles = StyleSheet.create({
         height: '100vh',
         width: '100%',
         backgroundColor: '#E9E9E9',
+        alignItems: 'center',
+        justifyContent: 'center'
   
     },
 
@@ -54,16 +57,5 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         justifyContent: "space-around",
         alignItems: 'center'
-    },
-
-    navIni: {
-        flex: 0,
-        backgroundColor:'black',
-        borderRadius: 100,
-        height:'60',
-        width:'60',
-        alignItems: 'flex-start',
-        marginTop: 60,
-        marginLeft: 30
     },
 })
