@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 12,
     backgroundColor: '#2E2E2E',
-    color: 'white',
-    padding: 10
+    color: 'white', 
+    padding: 5,
 
   },
   paragraph: {
