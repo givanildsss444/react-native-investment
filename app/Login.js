@@ -1,14 +1,35 @@
 import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } from 'react-native';
 
-import { Card } from 'react-native-paper';
-import { useRouter } from 'expo-router'
+  import { Card } from 'react-native-paper';
+  import { useRouter } from 'expo-router'
+  import { auth } from '../firebase.config';
+  import { signInWithEmailAndPassword } from 'firebase/auth'; 
+  import { useState } from 'react';
 
-import logo from '../assets/logoInvestment.png'
-import back from '../assets/backArrow.png'
+  import logo from '../assets/logoInvestment.png'
+  import back from '../assets/backArrow.png'
 
-export default function Login() {
+  
+  export default function Login() {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
 
-  const router = useRouter()
+    const router = useRouter()
+
+    async function Authentication(){
+      try{
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        const user = userCredential.user;
+
+        console.log(user);
+      }
+      catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log( `Error Code: ${errorCode}` )
+        console.log( `Error Message: ${errorMessage}` )
+      };
+    }
 
   return (
 
@@ -25,20 +46,20 @@ export default function Login() {
       <View style={styles.div}>
 
         <View style={{backgroundColor: '#F3E373'}}>
-          <Text style={styles.paragraph}>Usuário</Text>
-          <TextInput style={styles.input}/>
+          <Text style={styles.paragraph}>Email</Text>
+          <TextInput style={styles.input} value={email} onChangeText={a => setEmail(a)}/>
         </View>
 
         <View style={{backgroundColor: '#F3E373'}}>
           <Text style={styles.paragraph}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.input}/>
+          <TextInput secureTextEntry={true} style={styles.input} value={senha} onChangeText={a => setSenha(a)}/>
         </View>
 
       </View>
 
 
       <View style={{gap:15, alignItems:'center'}}>
-        <Pressable onPress={() => router.navigate('/Inicio')}>
+        <Pressable onPress={Authentication}>
 
           <Text style={styles.butao}>Entrar</Text>
       
