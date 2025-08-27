@@ -2,13 +2,36 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 
 import { Card } from 'react-native-paper';
 import { useRouter } from 'expo-router'
+import { useState } from 'react';
 
-import logo from '../assets/logoInvestment.png'
+import { auth } from '../firebase.config';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import logo from '../assets/logoInvestment.png' 
 import back from '../assets/backArrow.png'
 
 export default function Login() {
 
   const router = useRouter()
+
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  async function CreateUser(){
+    try{
+      const userCredential = await createUserWithEmailAndPassword(auth, newEmai, newPassword)
+      const user = userCredential.user;
+
+      console.log(user)
+      router.navigate("/Login")
+    }
+    catch(error){
+      const errorCode = error.code;
+      console.log(errorCode)
+    }
+
+
+  }
 
   return (
 
@@ -27,12 +50,13 @@ export default function Login() {
       
         <View style={{backgroundColor: '#F3E373',}}>
             <Text style={styles.paragraph}>E-mail</Text>
-            <TextInput secureTextEntry={true} style={styles.input}/>
+            <TextInput style={styles.input}
+            value={newEmail} onChangeText={a => setNewEmail(a)}/>
         </View>
 
         <View style={{backgroundColor: '#F3E373',}}>
             <Text style={styles.paragraph}>Senha</Text>
-            <TextInput style={styles.input}/>
+            <TextInput secureTextEntry={true} style={styles.input} value={newPassword} onChangeText={a => setNewPassword(a)}/>
         </View>
 
         <View style={{backgroundColor: '#F3E373',}}>
@@ -52,7 +76,7 @@ export default function Login() {
       
     </View>
 
-    <Pressable onPress={() => router.navigate('/Login')}>
+    <Pressable onPress={CreateUser}>
     
         <Text style={styles.butao}>Confirmar</Text>
           
@@ -79,8 +103,8 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 12,
     backgroundColor: '#2E2E2E',
-    color: 'white',
-    padding: 10
+    color: 'white', 
+    padding: 5,
 
   },
   paragraph: {

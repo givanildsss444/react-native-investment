@@ -13,69 +13,105 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
   export default function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [errorText, setErrorText] = useState("")
 
-    const router = useRouter()
+      const router = useRouter()
 
-    async function Authentication(){
-      try{
-        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-        const user = userCredential.user;
+      async function Authentication(){
+        try{  
+          const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+          const user = userCredential.user;
 
-        console.log(user);
+          console.log(user);
+          router.navigate("/Inicio")
+          setErrorText("")
+        }
+        catch (error) {
+          const errorCode = error.code;
+
+          console.log(errorCode)
+
+          if(!email){
+            setErrorText("Insira um email")
+          }
+          else if(errorCode === "auth/invalid-email"){
+            setErrorText("Email inválido.");
+          }
+          else if(!senha){
+            setErrorText("Insira uma senha");
+          } 
+          else if(errorCode === "auth/wrong-password"){
+            setErrorText("Senha incorreta.");
+          }
+          else if(errorCode === "auth/user-not-found"){
+            setErrorText("Usuário não encontrado.");
+          }
+          else {
+            setErrorText("Erro ao fazer login. Tente novamente.");
+          }
+
+         setTimeout(() => {
+          setErrorText("")
+
+         },4000)
+    
+        };
+
       }
-      catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log( `Error Code: ${errorCode}` )
-        console.log( `Error Message: ${errorMessage}` )
-      };
-    }
 
-  return (
+    return (
 
-    <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
 
-      <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
-          <Image source={back}/>
-
-      </Pressable>
-
-      <Image style={styles.png} source={logo} />
-
-
-      <View style={styles.div}>
-
-        <View style={{backgroundColor: '#F3E373'}}>
-          <Text style={styles.paragraph}>Email</Text>
-          <TextInput style={styles.input} value={email} onChangeText={a => setEmail(a)}/>
-        </View>
-
-        <View style={{backgroundColor: '#F3E373'}}>
-          <Text style={styles.paragraph}>Senha</Text>
-          <TextInput secureTextEntry={true} style={styles.input} value={senha} onChangeText={a => setSenha(a)}/>
-        </View>
-
-      </View>
-
-
-      <View style={{gap:15, alignItems:'center'}}>
-        <Pressable onPress={Authentication}>
-
-          <Text style={styles.butao}>Entrar</Text>
-      
-        </Pressable> 
-
-        <Pressable onPress={() => router.navigate('/EsqueciSenha')}>
-
-          <Text style={styles.senha}>Esqueci minha Senha</Text>
+        <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+            <Image source={back}/>
 
         </Pressable>
-      </View>
+
+        <Image style={styles.png} source={logo} />
 
 
-    </SafeAreaView>
-  );
-}
+        <View style={styles.div}>
+
+          <View style={{backgroundColor: '#F3E373'}}>
+            <Text style={styles.paragraph}>Email</Text>
+            <TextInput style={styles.input} value={email} onChangeText={a => setEmail(a)}/>
+          </View>
+
+          <View style={{backgroundColor: '#F3E373'}}>
+            <Text style={styles.paragraph}>Senha</Text>
+            <TextInput secureTextEntry={true} style={styles.input} value={senha} onChangeText={a => setSenha(a)}/>
+          </View>
+
+        </View>
+
+        {errorText ? (
+        <View style={styles.errorBox}>
+
+          <Text style={styles.errorText}>{errorText}</Text>
+
+        </View>
+      ) : null}
+
+        <View style={{gap:15, alignItems:'center'}}>
+          <Pressable onPress={Authentication}>
+
+            <Text style={styles.butao}>Entrar</Text>
+        
+          </Pressable> 
+
+          <Pressable onPress={() => router.navigate('/EsqueciSenha')}>
+
+            <Text style={styles.senha}>Esqueci minha Senha</Text>
+
+          </Pressable>
+        </View>
+
+
+
+      </SafeAreaView>
+    );
+  }
 
 const styles = StyleSheet.create({
   container: {
@@ -128,5 +164,26 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
     
+  },
+
+  errorBox: {
+    backgroundColor: '#ff4d4d',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 15,
+    marginBottom: 20,
+    width: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  errorText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });
