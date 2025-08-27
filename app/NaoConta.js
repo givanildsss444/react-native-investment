@@ -19,10 +19,9 @@ export default function Login() {
 
   async function CreateUser(){
     try{
-      const userCredential = await createUserWithEmailAndPassword(auth, newEmai, newPassword)
+      const userCredential = await createUserWithEmailAndPassword(auth, newEmail, newPassword)
       const user = userCredential.user;
 
-      console.log(user)
       router.navigate("/Login")
     }
     catch(error){
