@@ -1,69 +1,140 @@
-import { Text, View, StyleSheet, Pressable, SafeAreaView } from "react-native";
+import React, { useState, useRef } from "react";
+import { Text, View, StyleSheet, Pressable, SafeAreaView, Animated, Dimensions } from "react-native";
 import { useRouter } from "expo-router";
 
-export default function Inicio(){
+const { width } = Dimensions.get("window");
 
-    const router = useRouter()
+export default function Inicio() {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const slideAnim = useRef(new Animated.Value(-width)).current; // começa fora da tela
 
-    return (
+  const toggleDrawer = () => {
+    if (isOpen) {
+      // fechar
+      Animated.timing(slideAnim, {
+        toValue: -width,
+        duration: 300,
+        useNativeDriver: true,
+      }).start(() => setIsOpen(false));
+    } else {
+      // abrir
+      setIsOpen(true);
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  };
 
-        <SafeAreaView style={styles.container}>
-            <View style={styles.navBar}>
-                
-                <Text>Casa </Text>
-                
-                <Pressable onPress={() => router.navigate('/TelaInve')}>
-                <Text>Investimentos </Text>
-                </Pressable>
+  return (
+    <SafeAreaView style={styles.container}>
+      
+      <View style={styles.navBar}>
+        <Text>Casa</Text>
 
-                <Pressable onPress={() => router.navigate('/Chat')}>
-                <Text>Chat </Text>
-                </Pressable>
+        <Pressable onPress={() => router.push("/TelaInve")}>
+          <Text>Investimentos</Text>
+        </Pressable>
 
-            </View>
+        <Pressable onPress={() => router.push("/Chat")}>
+          <Text>Chat</Text>
+        </Pressable>
+      </View>
 
-            <Pressable onPress={() => router.navigate('/Perfil')}>
-            <View style={styles.navIni}>
+      {/* Botão do Drawer */}
+      <Pressable onPress={toggleDrawer}>
+        <View style={styles.drawer}>
+          <Text style={styles.more}>☰ Menu</Text>
+        </View>
+      </Pressable>
 
-            </View>
-            </Pressable>
-        </SafeAreaView>
-
-    );
-
+      {/* Drawer animado */}
+      {isOpen && (
+        <Animated.View
+          style={[
+            styles.drawerMenu,
+            { transform: [{ translateX: slideAnim }] },
+          ]}
+        >
+          <Text style={styles.drawerTitle}>Menu</Text>
+          <Pressable onPress={() => router.push("/Perfil")}>
+            <Text style={styles.drawerItem}>Perfil</Text>
+          </Pressable>
+          <Pressable onPress={() => router.push("/Config")}>
+            <Text style={styles.drawerItem}>Configurações</Text>
+          </Pressable>
+          <Pressable onPress={() => router.navigate("/")}>
+            <Text style={styles.drawerClose}>Sair</Text>
+          </Pressable>
+        </Animated.View>
+      )}
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height: '100vh',
-        width: '100%',
-        backgroundColor: '#E9E9E9',
-  
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#E9E9E9",
+  },
 
-    navBar: {
-        display: 'flex',
-        flexDirection: 'row',
-        position:'absolute',
-        bottom:0,
-        backgroundColor:'#505050',
-        borderRadius: 25,
-        height:'89',
-        width:'100%',
-        marginBottom: 10,
-        justifyContent: "space-around",
-        alignItems: 'center'
-    },
+  navBar: {
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#505050",
+    borderRadius: 25,
+    height: 89,
+    width: "100%",
+    marginBottom: 10,
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
 
-    navIni: {
-        flex: 0,
-        backgroundColor:'black',
-        borderRadius: 100,
-        height:'60',
-        width:'60',
-        alignItems: 'flex-start',
-        marginTop: 60,
-        marginLeft: 30
-    },
-})
+  drawer: {
+    backgroundColor: "black",
+    height: 50,
+    width: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    marginLeft: 20,
+    borderRadius: 10,
+  },
+
+  more: {
+    color: "white",
+    fontSize: 16,
+  },
+
+  drawerMenu: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: width * 0.7, // ocupa 70% da tela
+    backgroundColor: "#333",
+    paddingTop: 60,
+    paddingHorizontal: 20,
+  },
+
+  drawerTitle: {
+    color: "white",
+    fontSize: 20,
+    marginBottom: 20,
+  },
+
+  drawerItem: {
+    color: "white",
+    fontSize: 16,
+    marginBottom: 15,
+  },
+
+  drawerClose: {
+    color: "red",
+    fontSize: 16,
+    marginTop: 20,
+  },
+});

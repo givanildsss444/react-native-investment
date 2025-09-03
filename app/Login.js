@@ -11,9 +11,10 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 
   
   export default function Login() {
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [email, setEmail] = useState("glf2@aluno.ifal.edu.br");
+    const [senha, setSenha] = useState("123456");
     const [errorText, setErrorText] = useState("")
+    
 
       const router = useRouter()
 
@@ -64,6 +65,7 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
       <SafeAreaView style={styles.container}>
 
         <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
+          
             <Image source={back}/>
 
         </Pressable>
