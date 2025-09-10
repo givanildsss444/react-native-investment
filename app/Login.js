@@ -1,10 +1,11 @@
 import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } from 'react-native';
 
-  import { Card } from 'react-native-paper';
+  import {ActivityIndicator } from 'react-native-paper';
   import { useRouter } from 'expo-router'
   import { auth } from '../firebase.config';
   import { signInWithEmailAndPassword } from 'firebase/auth'; 
   import { useState } from 'react';
+  
 
   import logo from '../assets/logoInvestment.png'
   import back from '../assets/backArrow.png'
@@ -14,11 +15,14 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
     const [email, setEmail] = useState("glf2@aluno.ifal.edu.br");
     const [senha, setSenha] = useState("123456");
     const [errorText, setErrorText] = useState("")
+    const [loading, setLoading] = useState(false)
     
 
       const router = useRouter()
 
       async function Authentication(){
+
+        setLoading(true)
         try{  
           const userCredential = await signInWithEmailAndPassword(auth, email, senha);
           const user = userCredential.user;
@@ -26,6 +30,7 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
           console.log(user);
           router.navigate("/Inicio")
           setErrorText("")
+          
         }
         catch (error) {
           const errorCode = error.code;
@@ -55,7 +60,12 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
           setErrorText("")
 
          },4000)
-    
+
+         
+        }
+        finally{
+          setLoading(false)
+
         };
 
       }
@@ -96,9 +106,20 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
       ) : null}
 
         <View style={{gap:15, alignItems:'center'}}>
-          <Pressable onPress={Authentication}>
+          <Pressable onPress={Authentication} disabled={loading}>
 
-            <Text style={styles.butao}>Entrar</Text>
+
+            {loading ? 
+              (
+                <ActivityIndicator animating={true} color="black" />
+              ): 
+              (
+                <Text style={styles.butao}>Entrar</Text>
+              )
+            }
+
+            
+            
         
           </Pressable> 
 

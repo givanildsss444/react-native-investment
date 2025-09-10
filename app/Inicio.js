@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Text, View, StyleSheet, Pressable, SafeAreaView, Animated, Dimensions } from "react-native";
 import { useRouter } from "expo-router";
+import { auth } from "../firebase.config";
 
 const { width } = Dimensions.get("window");
 
@@ -8,6 +9,8 @@ export default function Inicio() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const slideAnim = useRef(new Animated.Value(-width)).current; // começa fora da tela
+
+  const user = auth.currentUser
 
   const toggleDrawer = () => {
     if (isOpen) {
@@ -50,6 +53,12 @@ export default function Inicio() {
         </View>
       </Pressable>
 
+      <View style={{borderColor:"red", borderWidth:2,  alignItems:"center"}}>
+      <Text>{user.email}</Text>
+      <Text>{user.uid}</Text>
+      
+      </View>
+
       {/* Drawer animado */}
       {isOpen && (
         <Animated.View
@@ -68,6 +77,7 @@ export default function Inicio() {
           <Pressable onPress={() => router.navigate("/")}>
             <Text style={styles.drawerClose}>Sair</Text>
           </Pressable>
+
         </Animated.View>
       )}
     </SafeAreaView>
