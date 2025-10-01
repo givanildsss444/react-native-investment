@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } from 'react-native';
+import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable, KeyboardAvoidingView, Platform } from 'react-native';
 
   import {ActivityIndicator } from 'react-native-paper';
   import { useRouter } from 'expo-router'
@@ -71,7 +71,9 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
       }
 
     return (
-
+      
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex:1}} enabled={true}>
+      
       <SafeAreaView style={styles.container}>
 
         <Pressable onPress={() => router.back()} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 20, marginTop: '-20%', marginBottom: 50,backgroundColor: '#F3E373', border: 'none'}}>
@@ -133,6 +135,7 @@ import { Text, SafeAreaView, StyleSheet, TextInput, View, Image, Pressable } fro
 
 
       </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -143,6 +146,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F3E373',
     padding: 8,
+    height: "100%",
+    width: "100%"
 
   },
   png: {

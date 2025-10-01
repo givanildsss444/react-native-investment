@@ -2,6 +2,10 @@ import React, { useState, useRef } from "react";
 import { Text, View, StyleSheet, Pressable, SafeAreaView, Animated, Dimensions } from "react-native";
 import { useRouter } from "expo-router";
 import { auth } from "../firebase.config";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+
 
 const { width } = Dimensions.get("window");
 
@@ -33,16 +37,20 @@ export default function Inicio() {
 
   return (
     <SafeAreaView style={styles.container}>
-      
+
       <View style={styles.navBar}>
-        <Text>Casa</Text>
+        <View style={styles.details}></View>
+
+        <Pressable>
+          <FontAwesome name="home" size={40} color="white" />  
+        </Pressable>        
 
         <Pressable onPress={() => router.push("/TelaInve")}>
-          <Text>Investimentos</Text>
+          <FontAwesome name="dollar" size={40} color="white" />
         </Pressable>
 
         <Pressable onPress={() => router.push("/Chat")}>
-          <Text>Chat</Text>
+          <Ionicons name="chatbubble" size={40} color="white" />
         </Pressable>
       </View>
 
@@ -87,7 +95,14 @@ export default function Inicio() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E9E9E9",
+    backgroundColor: '#D9D9D9',
+  },
+
+  details: {
+    height:"100vh",
+    width: 30,
+    backgroundColor: '#777777',
+s
   },
 
   navBar: {
@@ -95,10 +110,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     backgroundColor: "#505050",
-    borderRadius: 25,
+    borderRadius: 20,
     height: 89,
     width: "100%",
-    marginBottom: 10,
+    
     justifyContent: "space-around",
     alignItems: "center",
   },
